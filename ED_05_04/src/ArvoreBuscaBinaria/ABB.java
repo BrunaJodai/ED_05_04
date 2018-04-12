@@ -73,7 +73,9 @@ public class ABB {
             if (aux == null) {
                 return false;
             }
-        }
+        }//fim do while
+        
+        //nó folha
         if (aux.FilhoEsquerdo == null && aux.FilhoDireito == null) {
             if (aux == raiz) {
                 raiz = null;
@@ -82,6 +84,8 @@ public class ABB {
             } else {
                 pai.FilhoDireito = null;
             }
+            
+        //nó com 1 filho na esquerda
         } else if (aux.FilhoDireito == null) {
             if (aux == raiz) {
                 raiz = aux.FilhoEsquerdo;
@@ -90,45 +94,48 @@ public class ABB {
             } else {
                 pai.FilhoDireito = aux.FilhoDireito;
             }
-            //parte confusa do código no slide 31 - trecho 4?????    
-        } else if (aux == raiz) {
-            raiz = aux.FilhoDireito;
-        } else if (F_esquerdo) {
-            pai.FilhoEsquerdo = aux.FilhoDireito;
-        } else {
-            pai.FilhoDireito = aux.FilhoEsquerdo;
-        }        
+            
+        //nó com 1 filho na direita  
+        } else if (aux.FilhoEsquerdo == null) {
+            if (aux == raiz) {
+                raiz = aux.FilhoDireito;
+            } else if (F_esquerdo) {
+                pai.FilhoEsquerdo = aux.FilhoDireito;
+            } else {
+                pai.FilhoDireito = aux.FilhoEsquerdo;
+            }
 
-    } else{
-        NoArvore rePlantar = ObterNorePlantar(aux);
-        
-        if(aux==raiz){
-            raiz = rePlantar;
-        } else if (F_esquerdo){
-            pai.FilhoEsquerdo = rePlantar;
         } else {
-            pai.FilhoDireito = rePlantar;
+            NoArvore rePlantar = ObterNoRePlantar(aux);
+
+            if (aux == raiz) {
+                raiz = rePlantar;
+            } else if (F_esquerdo) {
+                pai.FilhoEsquerdo = rePlantar;
+            } else {
+                pai.FilhoDireito = rePlantar;
+            }
+            rePlantar.FilhoEsquerdo = aux.FilhoEsquerdo;
+            
         }
-        rePlantar.FilhoEsquerdo = aux.FilhoEsquerdo;
-        
-    return true;    
-}
-    
-    public NoArvore ObterNoRePlantar(NoArvore NoRe){
+        return true;
+    }
+
+    public NoArvore ObterNoRePlantar(NoArvore NoRe) {
         NoArvore rePlantarPai = NoRe;
         NoArvore rePlantar = NoRe;
         NoArvore aux = NoRe.FilhoDireito;
-        
-        while(aux != null){
+
+        while (aux != null) {
             rePlantarPai = rePlantar;
             rePlantar = aux;
             aux = aux.FilhoEsquerdo;
         }
-        if(rePlantar != NoRe.FilhoDireito){
-            rePlantarPai.FilhoEsquerdo=rePlantar.FilhoDireito;
-            rePlantar.FilhoDireito=NoRe.FilhoDireito;
+        if (rePlantar != NoRe.FilhoDireito) {
+            rePlantarPai.FilhoEsquerdo = rePlantar.FilhoDireito;
+            rePlantar.FilhoDireito = NoRe.FilhoDireito;
         }
-        System.out.println("O nó replantado é " +rePlantar);
+        System.out.println("O nó replantado é " + rePlantar);
         return rePlantar;
     }
 
