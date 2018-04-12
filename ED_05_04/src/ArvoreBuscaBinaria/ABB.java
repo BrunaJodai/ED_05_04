@@ -12,6 +12,7 @@ public class ABB {
         raiz = null;
     }
 
+    //inserção do nó
     public void inserirNo(int d, String nom) {
         NoArvore novo = new NoArvore(d, nom);
 
@@ -41,6 +42,7 @@ public class ABB {
         }
     }
 
+    //busca do nó
     public NoArvore buscarNo(int d) {
         NoArvore aux = raiz;
 
@@ -57,6 +59,7 @@ public class ABB {
         return aux;
     }
 
+    //remoção de um elemento e re-organização da árvore
     public boolean remover(int d) {
         NoArvore aux = raiz;
         NoArvore pai = raiz;
