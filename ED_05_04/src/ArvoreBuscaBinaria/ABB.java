@@ -78,7 +78,7 @@ public class ABB {
             }
         }//fim do while
         
-        //nó folha
+        //remove nó folha
         if (aux.FilhoEsquerdo == null && aux.FilhoDireito == null) {
             if (aux == raiz) {
                 raiz = null;
@@ -88,7 +88,7 @@ public class ABB {
                 pai.FilhoDireito = null;
             }
             
-        //nó com 1 filho na esquerda
+        //remove nó com filho na esquerda
         } else if (aux.FilhoDireito == null) {
             if (aux == raiz) {
                 raiz = aux.FilhoEsquerdo;
@@ -98,7 +98,7 @@ public class ABB {
                 pai.FilhoDireito = aux.FilhoDireito;
             }
             
-        //nó com 1 filho na direita  
+        //remove nó com filho na direita  
         } else if (aux.FilhoEsquerdo == null) {
             if (aux == raiz) {
                 raiz = aux.FilhoDireito;
@@ -108,6 +108,7 @@ public class ABB {
                 pai.FilhoDireito = aux.FilhoEsquerdo;
             }
 
+        //remove nó com 2 filhos
         } else {
             NoArvore rePlantar = ObterNoRePlantar(aux);
 
@@ -124,6 +125,7 @@ public class ABB {
         return true;
     }
 
+    //re-aloca a folha, quando um nó com dois filhos é removido
     public NoArvore ObterNoRePlantar(NoArvore NoRe) {
         NoArvore rePlantarPai = NoRe;
         NoArvore rePlantar = NoRe;
